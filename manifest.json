@@ -1,6 +1,7 @@
 {
   "name": "Brainbox",
   "short_name": "Brainbox",
+  "description": "A simple notes app PWA",
   "icons": [{
     "src": "/icons/icon-128x128.png",
     "sizes": "128x128",
