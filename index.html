@@ -3,14 +3,14 @@
 <head>
   <title>BrainBox</title>
   <meta name="description" content="A simple notes app PWA, made for use on mobile.">
-  <meta name="theme-color" content="#FF6347" />
+  <meta name="theme-color" content="#4169e1" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Notes app PWA">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" href="icons/icon-152x152.png">
   <link rel="stylesheet" type="text/css" href="style.css" />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,600" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
 </head>
 
@@ -18,7 +18,7 @@
 <h1 class="title">BrainBox</h1>
 
 <div class="note-container">
-  <textarea id="note-text" aria-label="Note text"></textarea>
+  <textarea id="note-text" aria-label="Note text" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
 </div>
 
 <script src="index.js" type="application/javascript"></script>

@@ -5,12 +5,13 @@ body * {
 .title {
     color: royalblue;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
 }
 
 .note-container {
     width: calc(100% - 20px);
-    height: 300px;
+    height: 200px;
     margin-left: 10px;
     overflow: hidden;
     border: 1px gainsboro solid;
@@ -25,5 +26,6 @@ body * {
     outline: none;
     font-size: 1.2rem;
     line-height: 1.5rem;
-    padding: 20px;
+    margin: 20px;
+    font-weight: 300;
 }
