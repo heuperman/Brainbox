@@ -2,25 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <header>
   <title>BrainBox</title>
-    <meta name="description" content="A simple notes app PWA, made for use on mobile.">
-    <meta name="theme-color" content="#FF6347" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Notes app PWA">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
-
-    <link rel="stylesheet" type="text/css" href="style.css" />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet"></header>
+  <meta name="description" content="A simple notes app PWA, made for use on mobile.">
+  <meta name="theme-color" content="#FF6347" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Notes app PWA">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
   <link rel="manifest" href="/manifest.json">
+</header>
 
 <body>
+<h1 class="title">BrainBox</h1>
 
-  <h1 class="title">BrainBox</h1>
+<div class="note-container">
+  <textarea id="note-text" aria-label="Note text"></textarea>
+</div>
 
-  <div class="note-container">
-    <textarea id="note-text" aria-label="Note text"></textarea>
-  </div>
-
-  <script src="index.js" type="application/javascript"></script>
+<script src="index.js" type="application/javascript"></script>
 </body>
