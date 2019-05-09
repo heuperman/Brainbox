@@ -3,26 +3,28 @@
 const CACHE_NAME = 'static-cache-v2';
 
 const FILES_TO_CACHE = [
-    'offline.html',
+    '/',
     'index.html',
     'style.css',
     'index.js',
+    '404.html',
+    'offline.html'
 ];
 
 self.addEventListener('install', (evt) => {
-    console.log('[ServiceWorker] Install');
+    console.log('[ServiceWorker] Attempting to install service worker and cache static assets');
     evt.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            console.log('[ServiceWorker] Pre-caching offline page');
-            return cache.addAll(FILES_TO_CACHE);
+        caches.open(CACHE_NAME)
+            .then((cache) => {
+                return cache.addAll(FILES_TO_CACHE);
         })
     );
     self.skipWaiting();
 });
 
-self.addEventListener('activate', (evt) => {
+self.addEventListener('activate', (event) => {
     console.log('[ServiceWorker] Activate');
-    evt.waitUntil(
+    event.waitUntil(
         caches.keys().then((keyList) => {
             return Promise.all(keyList.map((key) => {
                 if (key !== CACHE_NAME) {
@@ -42,14 +44,14 @@ self.addEventListener('fetch', (event) => {
         caches.match(event.request)
             .then(response => {
                 if (response) {
-                    console.log('Found ', event.request.url, ' in cache');
+                    console.log('[ServiceWorker] Found ', event.request.url, ' in cache');
                     return response;
                 }
                 console.log('Network request for ', event.request.url);
                 return fetch(event.request)
                     .then(response => {
                         if (response.status === 404) {
-                            return caches.match('offline.html');
+                            return caches.match('pages/404.html');
                         }
                         return caches.open(CACHE_NAME)
                             .then(cache => {
@@ -58,8 +60,8 @@ self.addEventListener('fetch', (event) => {
                             });
                     });
             }).catch(error => {
-            console.log('Error, ', error);
-            return caches.match('offline.html');
+            console.log('[ServiceWorker] Error, ', error);
+            return caches.match('pages/offline.html');
         })
     );
 });
