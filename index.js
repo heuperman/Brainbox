@@ -27,7 +27,6 @@ function save() {
         data[index] = textArea.value;
         index++;
     }
-    console.log('Saving...', data);
     localStorage.setItem('brainbox', JSON.stringify(data));
 }
 
@@ -36,6 +35,7 @@ function addNote() {
     noteContainer.classList.add('note-container');
     const noteTextArea = document.createElement('textArea');
     noteTextArea.classList.add('note-text-area');
+    noteTextArea.addEventListener('keyup', save);
     const addNoteButton = document.getElementById('add-note-button');
     noteContainer.appendChild(noteTextArea);
     document.body.insertBefore(noteContainer, addNoteButton);
@@ -43,26 +43,26 @@ function addNote() {
 }
 
 function addListeners() {
-    const textAreas = document.getElementsByClassName('note-text-area');
     const addNoteButton = document.getElementById('add-note-button');
     addNoteButton.addEventListener('click', addNote);
-    for (const textArea of textAreas) {
-        textArea.addEventListener('keyup', save);
+}
+
+function addServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+            .then((registration) => {
+                console.log('Service worker registered., scope is:', registration.scope);
+            })
+            .catch(function(error) {
+                console.log('Service worker registration failed, error:', error);
+            });
     }
 }
 
 window.onload = () => {
     load();
     addListeners();
+    addServiceWorker();
 };
-
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-            .then((reg) => {
-                console.log('Service worker registered.', reg);
-            });
-    });
-}
 
 

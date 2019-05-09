@@ -1,16 +1,16 @@
 'use strict';
 
-// CODELAB: Update cache names any time any of the cached files change.
-const CACHE_NAME = 'static-cache-v1';
+const CACHE_NAME = 'static-cache-v2';
 
-// CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
     'offline.html',
+    'index.html',
+    'style.css',
+    'index.js',
 ];
 
 self.addEventListener('install', (evt) => {
     console.log('[ServiceWorker] Install');
-    // CODELAB: Precache static resources here.
     evt.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             console.log('[ServiceWorker] Pre-caching offline page');
@@ -22,7 +22,6 @@ self.addEventListener('install', (evt) => {
 
 self.addEventListener('activate', (evt) => {
     console.log('[ServiceWorker] Activate');
-    // CODELAB: Remove previous cached data from disk.
     evt.waitUntil(
         caches.keys().then((keyList) => {
             return Promise.all(keyList.map((key) => {
@@ -36,20 +35,31 @@ self.addEventListener('activate', (evt) => {
     self.clients.claim();
 });
 
-self.addEventListener('fetch', (evt) => {
-    console.log('[ServiceWorker] Fetch', evt.request.url);
-    // CODELAB: Add fetch event handler here.
-    if (evt.request.mode !== 'navigate') {
-        // Not a page navigation, bail.
-        return;
-    }
-    evt.respondWith(
-        fetch(evt.request)
-            .catch(() => {
-                return caches.open(CACHE_NAME)
-                    .then((cache) => {
-                        return cache.match('offline.html');
+self.addEventListener('fetch', (event) => {
+    console.log('[ServiceWorker] Fetch event for ', event.request.url);
+
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => {
+                if (response) {
+                    console.log('Found ', event.request.url, ' in cache');
+                    return response;
+                }
+                console.log('Network request for ', event.request.url);
+                return fetch(event.request)
+                    .then(response => {
+                        if (response.status === 404) {
+                            return caches.match('offline.html');
+                        }
+                        return caches.open(CACHE_NAME)
+                            .then(cache => {
+                                cache.put(event.request.url, response.clone());
+                                return response;
+                            });
                     });
-            })
+            }).catch(error => {
+            console.log('Error, ', error);
+            return caches.match('offline.html');
+        })
     );
 });
