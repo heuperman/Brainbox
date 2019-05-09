@@ -16,6 +16,7 @@ body * {
     overflow: hidden;
     border: 1px gainsboro solid;
     border-radius: 6px;
+    touch-action: none;
 }
 
 .note-container:not(:first-child) {
@@ -28,10 +29,12 @@ body * {
     resize: none;
     border: none;
     outline: none;
+    padding: 0;
     font-size: 1.2rem;
     line-height: 1.5rem;
     margin: 20px;
     font-weight: 300;
+    touch-action: none;
 }
 
 #add-note-button {
