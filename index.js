@@ -31,15 +31,50 @@ function save() {
 }
 
 function addNote() {
+    const noteContainer = createNoteContainer();
+    const noteTextArea = createNoteTextArea();
+    const deleteNoteButton = createDeleteButton();
+    const addNoteButton = document.getElementById('add-note-button');
+    appendToPage(noteContainer, deleteNoteButton, addNoteButton, noteTextArea);
+    return noteTextArea;
+}
+
+function createNoteContainer() {
     const noteContainer = document.createElement('div');
     noteContainer.classList.add('note-container');
+    noteContainer.addEventListener('click', showDeleteButton);
+    return noteContainer;
+}
+
+function createNoteTextArea() {
     const noteTextArea = document.createElement('textArea');
     noteTextArea.classList.add('note-text-area');
     noteTextArea.addEventListener('keyup', save);
-    const addNoteButton = document.getElementById('add-note-button');
+    return noteTextArea;
+}
+
+function createDeleteButton() {
+    const deleteNoteButton = document.createElement('button');
+    deleteNoteButton.classList.add('delete-note-button', 'material-icons');
+    deleteNoteButton.innerText = 'close';
+    return deleteNoteButton
+}
+
+function appendToPage(noteContainer, deleteNoteButton, addNoteButton, noteTextArea) {
+    noteContainer.appendChild(deleteNoteButton);
     noteContainer.appendChild(noteTextArea);
     document.body.insertBefore(noteContainer, addNoteButton);
-    return noteTextArea;
+}
+
+function showDeleteButton(event) {
+    const selectedNoteDeleteButton = event.target.parentElement.childNodes[0];
+    const deleteButtons = document.getElementsByClassName('delete-note-button');
+    for (const button of deleteButtons) {
+        button.classList.remove('display');
+        button.classList.add('hide');
+    }
+    selectedNoteDeleteButton.classList.remove('hide');
+    selectedNoteDeleteButton.classList.add('display');
 }
 
 function addListeners() {

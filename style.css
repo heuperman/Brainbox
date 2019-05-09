@@ -28,6 +28,7 @@ body * {
     resize: none;
     border: none;
     outline: none;
+    padding: 0;
     font-size: 1.2rem;
     line-height: 1.5rem;
     margin: 20px;
@@ -43,4 +44,30 @@ body * {
     border: none;
     background: none;
     outline: none;
+}
+
+.note-container .delete-note-button {
+    color: gainsboro;
+    position: absolute;
+    margin-top: 2px;
+    left: calc(100% - 52px);
+    opacity: 0;
+}
+
+.delete-note-button.display {
+    animation: fadein 0.5s forwards;
+}
+
+.delete-note-button.hide {
+    animation: fadeout 0.5s forwards;
+
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    to   { opacity: 0; }
 }
