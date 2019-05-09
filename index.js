@@ -2,7 +2,12 @@
 
 function load() {
     const data = JSON.parse(localStorage.getItem('brainbox'));
-    data ? createLoadedNotes(data) : addNote();
+    if (data && data.hasOwnProperty(0)) {
+        createLoadedNotes(data);
+    } else {
+        localStorage.clear();
+        addNote();
+    }
 }
 
 function createLoadedNotes(data) {
