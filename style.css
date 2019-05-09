@@ -11,14 +11,18 @@ body * {
 
 .note-container {
     width: calc(100% - 20px);
-    height: 200px;
+    height: 160px;
     margin-left: 10px;
     overflow: hidden;
     border: 1px gainsboro solid;
-    border-radius: 8px;
+    border-radius: 6px;
 }
 
-#note-text {
+.note-container:not(:first-child) {
+    margin-top: 10px;
+}
+
+.note-text-area {
     width: calc(100% - 40px);
     height: calc(100% - 40px);
     resize: none;
@@ -28,4 +32,16 @@ body * {
     line-height: 1.5rem;
     margin: 20px;
     font-weight: 300;
+}
+
+#add-note-button {
+    margin: 12px 12px;
+    color: royalblue;
+    font-size: 48px;
+    cursor: pointer;
+    float: right;
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
 }
