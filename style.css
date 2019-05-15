@@ -35,22 +35,27 @@ body * {
     font-weight: 300;
 }
 
-#add-note-button {
-    margin: 12px 12px;
-    color: royalblue;
-    font-size: 48px;
+#add-note-button, .delete-note-button {
     cursor: pointer;
     padding: 0;
     border: none;
     background: none;
     outline: none;
+    line-height: 1.15;
+    text-transform: none;
+}
+
+#add-note-button {
+    margin: 12px 12px;
+    color: royalblue;
+    font-size: 48px;
 }
 
 .note-container .delete-note-button {
     color: gainsboro;
     position: absolute;
-    margin-top: 2px;
-    left: calc(100% - 52px);
+    margin: 2px 0 0 0;
+    left: calc(100% - 42px);
     opacity: 0;
 }
 
