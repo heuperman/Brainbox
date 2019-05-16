@@ -56,6 +56,7 @@ function createNoteTextArea() {
 function createDeleteButton() {
     const deleteNoteButton = document.createElement('button');
     deleteNoteButton.classList.add('delete-note-button', 'material-icons');
+    deleteNoteButton.addEventListener('click', deleteNote);
     deleteNoteButton.innerText = 'close';
     return deleteNoteButton
 }
@@ -92,6 +93,11 @@ function addServiceWorker() {
                 console.log('Service worker registration failed, error:', error);
             });
     }
+}
+
+function deleteNote(event) {
+    event.target.parentElement.remove();
+    save();
 }
 
 window.onload = () => {

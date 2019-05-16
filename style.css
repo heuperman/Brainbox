@@ -57,10 +57,12 @@ body * {
     margin: 2px 0 0 0;
     left: calc(100% - 42px);
     opacity: 0;
+    pointer-events: none;
 }
 
 .delete-note-button.display {
     animation: fadein 0.5s forwards;
+    pointer-events: auto;
 }
 
 .delete-note-button.hide {
